@@ -20,6 +20,8 @@ const CryptoDetails = () => {
   const { data : coinHistory } = useGetCryptoHistoryQuery({coinId , timePeriod});
   const cryptoDetails = data?.data?.coin;
 
+  console.log(cryptoDetails);
+
   if(isFetching) return <Loader/>;
 
 
@@ -45,7 +47,7 @@ const CryptoDetails = () => {
     <Col className='coin-detail-container'>
       <Col className='coin-heading-container'>
         <Title level={2} className='coin-name'>
-          {cryptoDetails?.name} ({cryptoDetails?.slug}) Price
+          {cryptoDetails?.name} ({cryptoDetails?.symbol}) Price
         </Title>
         <p>
           {cryptoDetails?.name} live price in us dollars
@@ -104,13 +106,13 @@ const CryptoDetails = () => {
       </Col>
       <Col className='coins-desc-link'>
             <Row className='coin-desc'>
-              <Title level={3} className='coin-detailes-heading'>
+              <Title level={3} className='coin-details-heading'>
                 What is {cryptoDetails?.name} ? 
                 {HTMLReactParser(cryptoDetails?.description)}
               </Title>
             </Row>
             <Col className='coin-links'>
-              <Title level={3} className='coin-detailes-heading'>
+              <Title level={3} className='coin-details-heading'>
                 {cryptoDetails?.name} Links
               </Title>
               {cryptoDetails?.links?.map((link, i) => (
