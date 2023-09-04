@@ -20,6 +20,7 @@ a:hover{
 .app{
     display: flex;
     overflow: hidden;
+    height:auto;
 }
 
 .navbar{
@@ -28,9 +29,12 @@ a:hover{
 }
 
 .main{
+    display: flex;
+    flex-direction: column;
+    align-content:space-between;
     flex: 0.8;
     width: 100%;
-    
+    height: 100%;
 }
 .routes{
     padding: 20px;
