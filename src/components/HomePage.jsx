@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 import { useGetCryptosQuery } from '../services/cryptoApi';
 import { Cryptocurrencies, News } from "./index";
 import Loader from './Loader';
+import ErrorPage from './ErrorPage';
 
 const { Title } =Typography;
 
 const HomePage = () => {
-  const { data , isFetching } = useGetCryptosQuery(10);
+  const { data , error, isFetching } = useGetCryptosQuery(10);
   const globalStats = data?.data?.stats;
 
   if(isFetching) return <Loader/>
+  if(error) return <ErrorPage error={error} />
 
   return (
     <>
@@ -20,11 +22,11 @@ const HomePage = () => {
         Global Crypto Stats
       </Title>
       <Row>
-        <Col span={12}><Statistic title="Totle Cryptocurrencies" value={globalStats.total}/></Col>
-        <Col span={12}><Statistic title="Totle Exchanges" value={millify(globalStats.totalExchanges)}/></Col>
-        <Col span={12}><Statistic title="Totle Market Cap" value={millify(globalStats.totalMarketCap)}/></Col>
-        <Col span={12}><Statistic title="Totle 24h Volume" value={millify(globalStats.total24Volume)}/></Col>
-        <Col span={12}><Statistic title="Totle Markets" value={millify(globalStats.totalMarkets)}/></Col>
+        <Col span={12}><Statistic title="Totle Cryptocurrencies" value={globalStats?.total}/></Col>
+        <Col span={12}><Statistic title="Totle Exchanges" value={millify(globalStats?.totalExchanges)}/></Col>
+        <Col span={12}><Statistic title="Totle Market Cap" value={millify(globalStats?.totalMarketCap)}/></Col>
+        <Col span={12}><Statistic title="Totle 24h Volume" value={millify(globalStats?.total24Volume)}/></Col>
+        <Col span={12}><Statistic title="Totle Markets" value={millify(globalStats?.totalMarkets)}/></Col>
       </Row>
       <div className='home-heading-container'>
         <Title level={2} className='home-title'>Top 10 Cryptocurrencies in the world</Title>

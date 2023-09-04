@@ -5,10 +5,11 @@ import { Card , Row , Col , Input } from "antd";
 
 import { useGetCryptosQuery } from '../services/cryptoApi'; 
 import Loader from './Loader';
+import ErrorPage from './ErrorPage';
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
-  const { data: cryptosList , isFetching} = useGetCryptosQuery(count);
+  const { data: cryptosList ,error, isFetching} = useGetCryptosQuery(count);
   const [ cryptos , setCryptos ] = useState([]);
   const [ searchTerm , setSearchTerm] = useState('');
 
@@ -20,6 +21,7 @@ const Cryptocurrencies = ({ simplified }) => {
 
 
   if(isFetching) return <Loader/>;
+  if(error) return <ErrorPage error={error}/>
 
   return (
     <>

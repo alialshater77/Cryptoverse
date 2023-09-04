@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useGetCryptoNewsQuery } from '../services/cryptoNewsApi';
 import { useGetCryptosQuery } from '../services/cryptoApi';
 import Loader from './Loader';
+import ErrorPage from './ErrorPage';
 
 const { Text , Title } = Typography;
 const { Option } = Select;
@@ -12,10 +13,11 @@ const demoUrl =  "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=New
 
 const News = ({ simplified }) => {
   const [newsCategory , setNewsCategory ] = useState('Cryptocurrency')
-  const { data: cryptoNews , isFetching } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12});
+  const { data: cryptoNews, error , isFetching } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12});
   const { data } = useGetCryptosQuery(100);
 
   if(isFetching) return <Loader/>;
+  if(error) return <ErrorPage error={error}/>
 
   return (
     <Row gutter={[24 , 24]}>

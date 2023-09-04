@@ -15,7 +15,7 @@ const App = () => {
         <Layout>
           <div className='routes'>
             <Routes>
-              <Route path='/' element={<HomePage/>} />
+              <Route path='/' element={<HomePage/>}/>
               <Route path='/cryptocurrencies' element={<Cryptocurrencies/>} />
               <Route path='/crypto/:coinId' element={<CryptoDetails/>} />
               <Route path='/news' element={<News/>} />
